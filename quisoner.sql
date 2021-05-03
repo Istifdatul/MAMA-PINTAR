@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2021 at 03:55 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: May 04, 2021 at 12:05 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `tb_anak` (
   `id_anak` varchar(255) NOT NULL,
   `id_user` varchar(255) NOT NULL,
   `nama_anak` varchar(255) NOT NULL,
-  `tanggal_lahir` date NOT NULL DEFAULT current_timestamp(),
+  `tanggal_lahir` date NOT NULL,
   `umur` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
