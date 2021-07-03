@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Riwayat"
-                    android:textSize="24sp"
+                    android:textSize="19sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/comicsansms"
                     android:textColor="@color/textColorPink"
@@ -138,10 +138,10 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/comicsansms"
-                    android:text="Stimulasi"
+                    android:text="Stimulasi dan Tahapan Perkembangan"
                     android:textStyle="bold"
                     android:textColor="@color/textColorPink"
-                    android:textSize="24sp" />
+                    android:textSize="19sp" />
             </LinearLayout>
 
             <View
@@ -156,7 +156,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linear_stimulasi" />
 
             <LinearLayout
-                android:id="@+id/linear_tentang"
+                android:id="@+id/linear_logout"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginStart="10dp"
@@ -178,14 +178,14 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/comicsansms"
-                    android:text="Tentang"
+                    android:text="Logout"
                     android:textStyle="bold"
                     android:textColor="@color/textColorPink"
-                    android:textSize="24sp" />
+                    android:textSize="19sp" />
             </LinearLayout>
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/view4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
@@ -193,7 +193,7 @@
                 android:background="@color/backgroundGrey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_tentang" />
+                app:layout_constraintTop_toBottomOf="@+id/linear_logout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

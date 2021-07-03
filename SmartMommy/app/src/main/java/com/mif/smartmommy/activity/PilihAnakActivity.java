@@ -1,19 +1,13 @@
-package com.mif.smartmommy.fragment;
+package com.mif.smartmommy.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,12 +18,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mif.smartmommy.MainActivity;
 import com.mif.smartmommy.R;
-import com.mif.smartmommy.activity.DetailAnakActivity;
-import com.mif.smartmommy.activity.TambahAnakActivity;
 import com.mif.smartmommy.adapter.AdapterListAnak;
 import com.mif.smartmommy.configfile.ServerApi;
 import com.mif.smartmommy.configfile.authdata;
 import com.mif.smartmommy.model.ModelListAnak;
+import com.mif.smartmommy.soal.SoalActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +31,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentAnak extends Fragment {
+public class PilihAnakActivity extends AppCompatActivity {
+    String id_jenis;
     RecyclerView recyclerView;
     List<ModelListAnak> item;
     AdapterListAnak adapterListAnak;
@@ -48,39 +42,23 @@ public class FragmentAnak extends Fragment {
     ProgressDialog progressDialog;
 
     String mIdUser;
-    ImageView tambah;
-
-    int nomor = 1;
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_anak, container, false);
-        authdataa = new authdata(getContext());
-        requestQueue = Volley.newRequestQueue(getContext());
-        progressDialog = new ProgressDialog(getContext());
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pilih_anak);
+        Intent intent = getIntent();
+        getSupportActionBar().hide();
 
-        recyclerView = v.findViewById(R.id.recyclerAnak);
+        id_jenis = intent.getStringExtra("id_jenis");
+
+        authdataa = new authdata(this);
+        progressDialog = new ProgressDialog(this);
+        requestQueue = Volley.newRequestQueue(this);
+
         mIdUser = authdataa.getId_user();
-        tambah = v.findViewById(R.id.tambah_anak);
-
-        tambah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a = new Intent(getActivity(), TambahAnakActivity.class);
-                startActivity(a);
-            }
-        });
+        recyclerView = findViewById(R.id.recyclerPilihAnak);
 
         loadAnak();
-        return v;
-//
-//        tombol omclick (
-//                nomor++;
-//
-//
-//                )
-//        getSoal(nomor;
     }
 
     private void loadAnak(){
@@ -106,8 +84,8 @@ public class FragmentAnak extends Fragment {
                         modelListAnak.setFoto_anak(datanya.getString("foto_anak"));
                         item.add(modelListAnak);
                     }
-                    adapterListAnak = new AdapterListAnak(getActivity(), item);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                    adapterListAnak = new AdapterListAnak(PilihAnakActivity.this, item);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PilihAnakActivity.this);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapterListAnak);
 
@@ -115,22 +93,30 @@ public class FragmentAnak extends Fragment {
                         @Override
                         public void onClick(int position) {
                             ModelListAnak modelListAnak = item.get(position);
-                            Intent detail = new Intent(getActivity(), DetailAnakActivity.class);
+                            Intent detail = new Intent(PilihAnakActivity.this, SoalActivity.class);
                             detail.putExtra("id_anak", modelListAnak.getId_anak());
+                            detail.putExtra("id_jenis", id_jenis);
                             startActivity(detail);
                         }
                     });
                 } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "Data tidak ada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PilihAnakActivity.this, "Data tidak ada", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Data tidak ada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PilihAnakActivity.this, "Data tidak ada", Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent abc = new Intent(PilihAnakActivity.this, MainActivity.class);
+        startActivity(abc);
+        finish();
     }
 }

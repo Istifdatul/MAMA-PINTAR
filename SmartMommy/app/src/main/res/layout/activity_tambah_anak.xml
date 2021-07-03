@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.RegisterActivity">
+    tools:context=".activity.TambahAnakActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/comicsansms"
-                android:text="Daftar akun"
+                android:text="Tambah Anak"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,20 +31,22 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:fontFamily="@font/comicsansms"
-                android:text="Silahkan daftar akun anda dengan mengisi data dengan benar."
+                android:text="Silahkan masukkan identitas anak anda dengan mengisi data dengan benar."
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/edt_nama_regis"
+                android:id="@+id/edt_nama_tambahanak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nama Pengguna"
+                android:hint="Nama Anak"
                 android:fontFamily="@font/comicsansms"
                 android:textColor="@color/black"
                 android:textSize="24sp"
@@ -58,61 +60,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/edt_username_regis"
+                android:id="@+id/edt_tgllahir_anak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Tanggal Lahir"
                 android:fontFamily="@font/comicsansms"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textColorHint="@color/textColorPink"
-                android:inputType="textPersonName"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_nama_regis" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_nama_tambahanak" />
 
             <EditText
-                android:id="@+id/edt_email_regis"
+                android:id="@+id/edt_jeniskelamin_anak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:fontFamily="@font/comicsansms"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textColorHint="@color/textColorPink"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_username_regis" />
-
-            <EditText
-                android:id="@+id/edt_password_regis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Kata Sandi"
-                android:fontFamily="@font/comicsansms"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textColorHint="@color/textColorPink"
-                android:inputType="textPassword"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_email_regis" />
-
-            <EditText
-                android:id="@+id/edt_status_regis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Status Wali"
+                android:hint="Jenis Kelamin"
                 android:fontFamily="@font/comicsansms"
                 android:textColor="@color/black"
                 android:textSize="24sp"
@@ -122,50 +89,24 @@
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_password_regis" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_tgllahir_anak" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_simpan_register"
+                android:id="@+id/btn_simpan_tambahanak"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/buttonColorPastel"
                 android:clickable="true"
                 android:fontFamily="@font/comicsansms"
-                android:hint="Daftar"
+                android:hint="Simpan"
                 android:textColorHint="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_status_regis" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/comicsansms"
-                android:text="Sudah memiliki akun?"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.360"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_simpan_register" />
-
-            <TextView
-                android:id="@+id/txt_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/comicsansms"
-                android:textSize="18sp"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/black"
-                android:text="Masuk"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/btn_simpan_register" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_jeniskelamin_anak" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listanak"
+    android:id="@+id/listriwayat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -25,7 +25,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:id="@+id/text_idanak"
+                android:id="@+id/text_idanak_riwayat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="qwert"
@@ -34,31 +34,32 @@
                 android:visibility="gone"/>
 
             <ImageView
-                android:id="@+id/image_fotoanak"
+                android:id="@+id/image_fotoanak_riwayat"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginStart="10dp"
                 android:src="@drawable/icon_bayi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_namaanak"
+                android:id="@+id/text_namaanak_riwayat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
                 android:layout_marginEnd="10dp"
-                android:text="Nama Anak"
-                android:textSize="16sp"
                 android:inputType="textMultiLine"
+                android:text="Nama Anak"
                 android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_fotoanak"
-                app:layout_constraintTop_toTopOf="@+id/image_fotoanak" />
+                app:layout_constraintStart_toEndOf="@+id/image_fotoanak_riwayat"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_tgllahiranak"
+                android:id="@+id/text_tgllahiranak_riwayat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="21-07-1999"
@@ -66,8 +67,22 @@
                 android:layout_marginEnd="10dp"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_fotoanak"
-                app:layout_constraintTop_toBottomOf="@+id/text_namaanak" />
+                app:layout_constraintStart_toEndOf="@+id/image_fotoanak_riwayat"
+                app:layout_constraintTop_toBottomOf="@+id/text_namaanak_riwayat" />
+
+            <TextView
+                android:id="@+id/text_hasil_riwayat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hasil Kuisioner : "
+                android:layout_marginStart="65dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="1dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_fotoanak_riwayat"
+                app:layout_constraintTop_toBottomOf="@+id/text_tgllahiranak_riwayat" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
