@@ -10,7 +10,7 @@
                                     <ul class="breadcrumb float-xl-left">
                                         <li class="nav-item">
                                         <h3 class="card-title">Paket Soal</h3>
-                                        <a href="<?= base_url() ?>page/tambahsoal?idp=<?= $id ?>"><button class="btn btn-sm btn-primary" style="background-color:#1a2035">Tambah paket</button></a>
+                                        <a href="<?= base_url() ?>page/tambahsoal?idp=<?= $id ?>"><button class="btn btn-sm btn-primary" style="background-color:#1a2035">Tambah Soal</button></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <td><?= $no ?></td>
                                                     <td><?= $ls->soal ?></td>
-                                                    <td><a href="<?= base_url(); ?>page/soal"><button class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i></button></a></td>
+                                                    <td><a href="#"><button class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i></button></a></td>
                                                 </tr>
                                             <?php $no++;
                                                 }

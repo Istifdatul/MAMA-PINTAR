@@ -14,16 +14,24 @@ class Registerakun extends REST_Controller {
   }
 
 public function index_post(){
+        $username = $this->post('username');
         $password = md5($this->input->post('password'));
         $email = $this->post('email');
+        $status = $this->post('status');
         $kode = $this->Kode->buatkode('id_user', 'tb_user', 'USR' , '4');
         date_default_timezone_set("Asia/Jakarta");
         $time =  Date('Y-m-d');
-        $cek = $this->db->get_where('tb_user', ['email' => $email])->row_array();
+        $cek = $this->db->get_where('tb_user', ['username' => $username])->row_array();
+        $cek2 = $this->db->get_where('tb_user', ['email' => $email])->row_array();
 
         
 
         if ($cek > 0){
+            $response = [
+                'status' => false,
+                'message' => 'Username Telah Digunakan',
+            ];
+        }else if ($cek2 > 0){
             $response = [
                 'status' => false,
                 'message' => 'Email Telah Digunakan',
@@ -31,45 +39,34 @@ public function index_post(){
         }else{
             $data = array(
                 'id_user '      => $kode,
-                'username'      => $this->post('username'),
-                'password'      => $password,
                 'nama'          => $this->post('nama'),
+                'username'      => $username,
+                'password'      => $password,
                 'email'         => $email,
                 'foto'          => 'default.jpeg',
                 'created_at'    => $time,
-                'is_aktif'      => 0
+                'is_aktif'      => 0,
+                'status'        => $status
             );
                 
                 $insert = $this->db->insert('tb_user', $data);
-
-                // $digits = 2;
-                // $num = rand(pow(10, $digits-1), pow(10, $digits)-1);
-                // $tokennya = uniqid(true);
-                // $user_token = [
-                //     'email' => $email,
-                //     'token' => $tokennya,
-                //     'v_num' => $num,
-                //     'date_created' => $time
-                // ];
-
-                // $cek2 = $this->db->insert('user_token', $user_token);
-                $kirim = $this->_sendEmail($tokennya, $email, 'verify');
+                $kirim = $this->_sendEmail($email, 'verify');
                 
 
                 $response = [
                     'status' => true,
-                    'pesan' => 'Pendaftaran Akun Berhasil',
+                    'message' => 'Pendaftaran Akun Berhasil',
                 ];
         }
         $this->response($response, 200);
     }
-    private function _sendEmail($token ,$email ,$type){
+    private function _sendEmail($email ,$type){
         
     $config = array();
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-    $config['smtp_user'] = 'info.sipermen@gmail.com';
-    $config['smtp_pass'] = 'Zxcasdqwe123';
+    $config['smtp_user'] = 'tiperprem@gmail.com';
+    $config['smtp_pass'] = 'saya1010';
     $config['smtp_port'] = 465;
     $config['mailtype'] = 'html';
     $config['charset'] = 'utf-8';
@@ -78,10 +75,10 @@ public function index_post(){
     $this->email->set_newline("\r\n"); 
     $this->load->library('email', $config);   
 
-    $from = "Jogja Medianet";
+    $from = "Tes Anak";
     $subject = "This The Te";
     $data = array();
-    $this->email->from($from. 'Jogja Medianet');
+    $this->email->from($from. 'Tes Anak');
     $this->email->to($email);
     $this->email->subject($subject);
         $this->email->message('
