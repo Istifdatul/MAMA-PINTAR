@@ -61,7 +61,7 @@ CREATE TABLE `tb_hasil` (
   `id_anak` varchar(255) NOT NULL,
   `id_user` varchar(255) NOT NULL,
   `total_point` float NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ CREATE TABLE `tb_user` (
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `created_at` date NOT NULL,
   `is_aktif` int(11) NOT NULL,
   `status` enum('Orang tua balita','Bidan','Kader Posyandu') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
