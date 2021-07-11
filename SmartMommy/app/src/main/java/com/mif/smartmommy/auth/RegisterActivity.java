@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -84,15 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
         buttonsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (nama.getText().toString().matches("")){
-                    Toast.makeText(RegisterActivity.this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (username.getText().toString().matches("")){
-                    Toast.makeText(RegisterActivity.this, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (email.getText().toString().matches("")){
-                    Toast.makeText(RegisterActivity.this, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (password.getText().toString().matches("")){
-                    Toast.makeText(RegisterActivity.this, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                }
                 simpan();
             }
         });
@@ -101,17 +94,44 @@ public class RegisterActivity extends AppCompatActivity {
     private void init(){
         progressDialog = new ProgressDialog(this);
         requestQueue = Volley.newRequestQueue(this);
-        nama = findViewById(R.id.edt_nama_regis);
-        username = findViewById(R.id.edt_username_regis);
-        email = findViewById(R.id.edt_email_regis);
-        password = findViewById(R.id.edt_password_regis);
+        nama = findViewById(R.id.edt_nama_register);
+        username = findViewById(R.id.edt_username_register);
+        email = findViewById(R.id.edt_email_register);
+        password = findViewById(R.id.edt_password_register);
         buttonsimpan = findViewById(R.id.btn_simpan_register);
-        status = findViewById(R.id.edt_status_regis);
+        status = findViewById(R.id.edt_status_register);
         login = findViewById(R.id.txt_login);
     }
 
     public void simpan(){
-        progressDialog.setMessage("Loading...");
+
+        final String namanya = nama.getText().toString().trim();
+        final String usernamenya = username.getText().toString().trim();
+        final String emailnya = email.getText().toString().trim();
+        final String passwordnya = password.getText().toString().trim();
+        final String statusnya = status.getText().toString().trim();
+
+        if (namanya.matches("")){
+            Toast.makeText(RegisterActivity.this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (usernamenya.matches("")){
+            Toast.makeText(RegisterActivity.this, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (passwordnya.matches("")){
+            Toast.makeText(RegisterActivity.this, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (emailnya.matches("")){
+            Toast.makeText(RegisterActivity.this, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (statusnya.matches("")){
+            Toast.makeText(RegisterActivity.this, "Status tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressDialog.setMessage("Loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerApi.URL_REGIS, new Response.Listener<String>() {
@@ -120,17 +140,23 @@ public class RegisterActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("status");
+
+                    Log.d("TAG", "onResponse: " + jsonObject.toString());
+
+                    Boolean status = jsonObject.getBoolean("status");
                     String message = jsonObject.getString("message");
-                    if (status.matches("false")){
+                    if (status.equals(true)){
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-                        Intent done = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(done);
+                        Intent logeng = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(logeng);
                         finish();
+                    } else if (status.equals(false)) {
+                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
+                    Log.d("TAG", "onResponse: message " + message);
+                    Log.d("TAG", "onResponse: status " + status);
                 } catch (JSONException e){
+                    Log.e("TAG", "onResponse: " + e.getMessage());
                     Toast.makeText(RegisterActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -138,22 +164,25 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(RegisterActivity.this, "Gagal Mendaftar", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onErrorResponse: " + error.getMessage());
+                Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("nama", nama.getText().toString().trim());
-                params.put("username", username.getText().toString().trim());
-                params.put("password", password.getText().toString().trim());
-                params.put("email", email.getText().toString().trim());
-                params.put("status", status.getText().toString().trim());
+                params.put("nama", namanya);
+                params.put("username", usernamenya);
+                params.put("password", passwordnya);
+                params.put("email", emailnya);
+                params.put("status", statusnya);
                 Log.e("data dari param: ", "" + params);
                 return params;
             }
         };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(25000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
     @Override
