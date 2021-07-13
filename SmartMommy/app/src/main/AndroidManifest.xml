@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartMommy"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.PilihAnakRiwayatActivity"></activity>
+        <activity android:name=".activity.PilihAnakRiwayatActivity" />
         <activity android:name=".activity.RiwayatActivity" />
         <activity android:name=".activity.PilihAnakStimulasiActivity" />
         <activity android:name=".activity.StimulasiActivity" />
@@ -31,7 +31,8 @@
         <activity android:name=".activity.PilihAnakActivity" />
         <activity android:name=".auth.RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".auth.LoginActivity">
+        <activity
+            android:name=".auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
