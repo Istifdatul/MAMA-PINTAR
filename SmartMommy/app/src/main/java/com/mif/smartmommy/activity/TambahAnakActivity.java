@@ -152,7 +152,8 @@ public class TambahAnakActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(TambahAnakActivity.this, "Anak berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahAnakActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(TambahAnakActivity.this, "Anak berhasil ditambahkan", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -161,7 +162,7 @@ public class TambahAnakActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("id_user", iduser);
                 params.put("nama_anak", nama.getText().toString().trim());
-                params.put("tgl_lahir", tgllhr.getText().toString().trim());
+                params.put("tanggal_lahir", tgllhr.getText().toString().trim());
                 params.put("jenis_kelamin", jnsklm.getText().toString().trim());
                 return params;
             }
