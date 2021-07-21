@@ -70,6 +70,7 @@ public class PilihAnakRiwayatActivity extends AppCompatActivity {
                         modelListAnak.setId_anak(datanya.getString("id_anak"));
                         modelListAnak.setNama_anak(datanya.getString("nama_anak"));
                         modelListAnak.setTanggal_lahir(datanya.getString("tanggal_lahir"));
+                        modelListAnak.setFoto_anak(datanya.getString("foto_anak"));
                         item.add(modelListAnak);
                     }
                     adapterListAnak = new AdapterListAnak(PilihAnakRiwayatActivity.this, item);

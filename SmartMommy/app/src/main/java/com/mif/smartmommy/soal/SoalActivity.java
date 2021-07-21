@@ -61,11 +61,11 @@ public class SoalActivity extends AppCompatActivity {
         id_jenis = intent.getStringExtra("id_jenis");
 
         if (id_jenis.equals("0")){
-            txtsoal.setText("KPSP");
+            txtjenis.setText("KPSP");
         } else if (id_jenis.equals("1")) {
-            txtsoal.setText("TDD");
+            txtjenis.setText("TDD");
         } else if (id_jenis.equals("2")){
-            txtsoal.setText("TDL");
+            txtjenis.setText("TDL");
         }
 
         postSoal();
