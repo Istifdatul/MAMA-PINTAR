@@ -42,6 +42,7 @@ public class SoalActivity extends AppCompatActivity {
     String id_anak;
     String id_jenis;
     String id_user;
+    String id_paket;
     String id_soal;
     String id_hasil;
     int jumlah_soal;
@@ -68,7 +69,7 @@ public class SoalActivity extends AppCompatActivity {
             txtjenis.setText("TDL");
         }
 
-        postSoal();
+
         loadSoal();
         btnya.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,9 +108,12 @@ public class SoalActivity extends AppCompatActivity {
                     JSONArray data = jsonObject.getJSONArray("data");
                     JSONObject soal = data.getJSONObject(nomorsoal);
                     id_soal = soal.getString("id_soal");
+                    id_paket = soal.getString("id_paket");
+                    System.out.println("Id Paket : " + id_paket);
                     jumlah_soal = soal.getInt("jumlah_soal");
                     jumlahsoalfiks = jumlah_soal - jumlahsoal1;
                     txtsoal.setText(soal.getString("soal"));
+                    postSoal();
                 } catch (JSONException e){
                     Toast.makeText(SoalActivity.this, "Soal tidak ada, umur dan quisioner tidak sesuai!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SoalActivity.this, MainActivity.class));
@@ -138,6 +142,8 @@ public class SoalActivity extends AppCompatActivity {
     }
 
     public void postSoal(){
+//        System.out.println("id_paket : " + id_paket);
+//        return;
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -167,6 +173,7 @@ public class SoalActivity extends AppCompatActivity {
 //                params.put("jenis", id_jenis);
                 params.put("id_anak", id_anak);
                 params.put("id_user", id_user);
+                params.put("id_paket", id_paket);
                 Log.e("data dari param: ", "" + params);
                 return params;
             }
@@ -175,6 +182,8 @@ public class SoalActivity extends AppCompatActivity {
     }
 
     public void simpanYa(){
+//        System.out.println("Id Hasil " + id_hasil);
+//        return;
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
